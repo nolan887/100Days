@@ -25,6 +25,7 @@ screen.onkey(r_paddle.pad_down, "Down")
 screen.onkey(l_paddle.pad_up,"w")
 screen.onkey(l_paddle.pad_down,"s")
 
+# TODO: collision detection with back walls, reset ball and add point to correct team
 screen.onkey(scoreboard.l_point,"q")
 screen.onkey(scoreboard.r_point,"e")
 
