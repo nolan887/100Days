@@ -1,26 +1,23 @@
 from turtle import Screen
 from paddle import Paddle
 from scoreboard import Scoreboard
+from ball import Ball
 
 # Variables assigned
 game_is_on = True
 
 # Screen window setup
 screen = Screen()
-screen.setup(width=800, height=600)
+screen.setup(width=840, height=640)
 screen.bgcolor("black")
 screen.title("P O N G")
 screen.tracer(0)
 
-def go_up():
-    print("moved up")
-
-def go_down():
-    print("moved down")
-
+# Generate game board
 r_paddle = Paddle((350, 0))
 l_paddle = Paddle((-350, 0))
 scoreboard = Scoreboard()
+ball = Ball()
 
 screen.listen()
 screen.onkey(r_paddle.pad_up, "Up")

@@ -14,15 +14,36 @@ class Scoreboard(Turtle):
         self.update_score()
 
     def centerline(self):
-        self.pencolor("white")
+        self.penup()
+        self.pencolor("yellow")
         self.goto(0, 300)
+        self.pendown()
         self.setheading(270)
         self.forward(600)
-        self.goto(0,250)
+        self.penup()
+        self.sidelines()
+
+
+    def sidelines(self):
+        self.color("red")
+        self.goto(400, 300)
+        self.pendown()
+        self.setheading(270)
+        self.forward(600)
+        self.setheading(180)
+        self.forward(800)
+        self.setheading(90)
+        self.forward(600)
+        self.setheading(0)
+        self.forward(800)
+        self.penup()
+
 
     def update_score(self):
         self.clear()
         self.centerline()
+        self.goto(0,250)
+        self.pencolor("green")
         self.write(f"{self.l_score}      {self.r_score}", False, align=ALIGNMENT, font=FONT)
 
     def l_point(self):

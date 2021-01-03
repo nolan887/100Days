@@ -1,6 +1,5 @@
 from turtle import Turtle
 
-STARTING_PLAYER_RIGHT = [(380,0)]
 MOVE_DISTANCE = 20
 
 class Paddle(Turtle):
@@ -14,9 +13,9 @@ class Paddle(Turtle):
         self.goto(coords)
 
     def pad_up(self):
-        self.new_y = self.ycor() + 20
+        self.new_y = self.ycor() + MOVE_DISTANCE
         self.goto(self.xcor(), self.new_y)
 
     def pad_down(self):
-        self.new_y = self.ycor() - 20
+        self.new_y = self.ycor() - MOVE_DISTANCE
         self.goto(self.xcor(), self.new_y)
