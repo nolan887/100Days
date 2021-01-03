@@ -3,6 +3,7 @@ from turtle import Turtle
 ALIGNMENT = "center"
 FONT = ("Menlo", 24, "normal")
 
+
 class Scoreboard(Turtle):
 
     def __init__(self):
@@ -23,7 +24,6 @@ class Scoreboard(Turtle):
         self.penup()
         self.sidelines()
 
-
     def sidelines(self):
         self.color("red")
         self.goto(400, 300)
@@ -38,11 +38,10 @@ class Scoreboard(Turtle):
         self.forward(800)
         self.penup()
 
-
     def update_score(self):
         self.clear()
         self.centerline()
-        self.goto(0,250)
+        self.goto(0, 250)
         self.pencolor("green")
         self.write(f"{self.l_score}      {self.r_score}", False, align=ALIGNMENT, font=FONT)
 
@@ -54,7 +53,7 @@ class Scoreboard(Turtle):
         self.r_score += 1
         self.update_score()
 
-    def game_over(self):
-        self.goto(0,0)
+    def game_over(self, winner):
+        self.goto(0, 0)
         self.color("red")
-        self.write("GAME OVER", align=ALIGNMENT, font=FONT)
+        self.write(f"GAME OVER, {winner} WINS!", align=ALIGNMENT, font=FONT)

@@ -1,18 +1,29 @@
 from turtle import Turtle
+import random
+
+BALL_START_ANGLES = [15, 30, 45, 135, 150, 165, 195, 210, 225, 315, 330, 345]
+
 
 class Ball(Turtle):
 
     def __init__(self):
         super().__init__()
         self.shape("circle")
-        self.color("white")
+        self.color("grey")
         self.penup()
-        self.ball.new_point()
+        self.new_point()
+        self.new_direction = 0
 
     def new_point(self):
-    #     TODO: reset ball to 0,0, initiate movememtn in a random direction
-        print("reset ball and start move")
+        self.goto(0, 0)
+        self.new_direction = random.choice(BALL_START_ANGLES)
+        self.setheading(self.new_direction)
 
-    def ball_move(self):
-        # TODO: make ball move
-        print("ball moves")
+    def moving(self):
+        self.forward(10)
+
+    def reverse(self):
+        self.setheading((self.heading()) + 180)
+
+    def mirror(self):
+        self.setheading((self.heading() * -1) + 180)
