@@ -1,11 +1,11 @@
 from turtle import Turtle
-import time
 import random
 
 COLORS = ["red", "orange", "yellow", "green", "blue", "purple"]
 STARTING_MOVE_DISTANCE = 5
 MOVE_INCREMENT = 2.5
 LANES_Y = [-255, -225, -195, -165, -135, -105, -75, -45, -15, 15, 45, 75, 105, 135, 165, 195, 225, 255]
+
 
 class CarManager(Turtle):
     def __init__(self):
@@ -15,7 +15,7 @@ class CarManager(Turtle):
         self.make_car()
 
     def make_car(self):
-        dice_roll = random.randint(1,5)
+        dice_roll = random.randint(1, 5)
         if dice_roll == 3:
             new_car = Turtle("square")
             new_car.penup()
@@ -35,4 +35,3 @@ class CarManager(Turtle):
 
     def drive_faster(self):
         self.speed += MOVE_INCREMENT
-

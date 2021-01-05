@@ -22,7 +22,7 @@ scoreboard = Scoreboard()
 car = CarManager()
 
 screen.listen()
-screen.onkey(player.move,"Up")
+screen.onkey(player.move, "Up")
 
 while game_is_on:
     time.sleep(0.1)
@@ -41,6 +41,5 @@ while game_is_on:
         player.reset()
         scoreboard.increase_level()
         car.drive_faster()
-
 
 screen.exitonclick()
