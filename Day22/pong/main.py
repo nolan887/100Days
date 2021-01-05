@@ -38,10 +38,10 @@ while game_is_on:
     # Ball passes by a paddle for a score on either side
     if ball.xcor() >= 380:
         scoreboard.l_point()
-        ball.new_point()
+        ball.new_point("left")
     elif ball.xcor() <= -380:
         scoreboard.r_point()
-        ball.new_point()
+        ball.new_point("right")
 
     # Ball bounces off of right paddle
     if ball.xcor() >= 325 and ball.distance(r_paddle) < 50:
