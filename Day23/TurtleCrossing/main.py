@@ -13,6 +13,8 @@ screen.tracer(0)
 
 # variables assigned
 game_is_on = True
+car_count = 0
+time_tracker = 0
 
 # Generate game board
 player = Player()
@@ -25,12 +27,20 @@ screen.onkey(player.move,"Up")
 while game_is_on:
     time.sleep(0.1)
     screen.update()
+    car.make_car()
+    car.drive()
 
-    # TODO: Check for collissions, trigger game over
+    # Check for squish
+    for cars in car.traffic:
+        if cars.distance(player) < 20:
+            game_is_on = False
+            scoreboard.game_over()
 
-
+    # Check for finish line
     if player.is_finished():
         player.reset()
         scoreboard.increase_level()
+        car.drive_faster()
+
 
 screen.exitonclick()

@@ -94,7 +94,8 @@ class Scoreboard(Turtle):
         self.pencolor("dodgerblue")
         self.write("START START START START START START START START START START", align="center", font=FONT)
         self.penup()
-        # print level
 
     def game_over(self):
-        pass
+        self.goto(0,0)
+        self.pencolor("red")
+        self.write("G A M E    O V E R", align="center",font=FONT)
