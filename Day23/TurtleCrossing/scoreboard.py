@@ -1,6 +1,7 @@
 from turtle import Turtle
 
-FONT = ("Courier", 24, "normal")
+FONT = ("Courier", 18, "normal")
+ALIGNMENT = ("center")
 
 
 class Scoreboard(Turtle):
@@ -10,9 +11,11 @@ class Scoreboard(Turtle):
         self.score = 0
         self.penup()
         self.drawlines()
+        self.increase_level()
         # self.update_score()
 
     def drawlines(self):
+        # Finish line area
         self.goto(-300,270)
         self.pendown()
         self.setheading(0)
@@ -25,8 +28,13 @@ class Scoreboard(Turtle):
         self.penup()
 
 
-        # TODO: FIGURE OUT STARTING LINE / SETUP
+        # Starting line area
         self.goto(-300,-270)
+        self.pendown()
+        self.setheading(0)
+        self.forward(600)
+        self.penup()
+        self.goto(-300,-300)
         self.pendown()
         self.setheading(0)
         self.forward(600)
@@ -40,7 +48,19 @@ class Scoreboard(Turtle):
         self.pendown()
         self.forward(600)
         self.penup()
-        # self.goto(-300,-270)
-        # self.pendown()
-        # self.pencolor("skyblue")
-        # self.forward(600)
+        self.goto(-300, -285)
+        self.setheading(0)
+        self.pencolor("skyblue")
+        self.pendown()
+        self.forward(600)
+        self.penup()
+
+    def increase_level(self):
+        self.score += 1
+        self.penup()
+        self.clear()
+        self.goto(0,285)
+        self.pencolor("white")
+        self.write("FINISH FINISH FINISH", align = ALIGNMENT, font=FONT)
+        self.penup()
+        # print level
