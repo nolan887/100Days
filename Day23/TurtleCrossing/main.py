@@ -17,6 +17,7 @@ game_is_on = True
 # Generate game board
 player = Player()
 scoreboard = Scoreboard()
+car = CarManager()
 
 screen.listen()
 screen.onkey(player.move,"Up")
@@ -24,6 +25,9 @@ screen.onkey(player.move,"Up")
 while game_is_on:
     time.sleep(0.1)
     screen.update()
+
+    # TODO: Check for collissions, trigger game over
+
 
     if player.is_finished():
         player.reset()
