@@ -38,3 +38,25 @@ weather_c = {
 weather_f = {day:(deg_c * 9/5 + 32) for (day, deg_c) in weather_c.items()}
 
 print(weather_f)
+
+# 26.6, How to iterate over a pandas dataframe
+
+import pandas
+
+student_dict = {
+    "student": ["Angela", "James", "Lily"],
+    "score": [56, 76, 98]
+}
+
+student_data_frame = pandas.DataFrame(student_dict)
+print(student_data_frame)
+
+# for (key, value) in student_data_frame.items():
+#     print(key)
+# REPLACED BY CODE BELOW
+for (index, row) in student_data_frame.iterrows():
+    # print(row)
+    print(row.student)
+    print(row.score)
+    if row.student == "Angela":
+        print(row.score)
