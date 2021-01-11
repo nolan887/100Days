@@ -4,8 +4,8 @@ data = pandas.read_csv("weather_data.csv")
 # print(type(data))
 # print(type(data["temp"]))
 
-# data_dictionary = data.to_dict()
-# print(data_dictionary)
+data_dictionary = data.to_dict()
+print(data_dictionary)
 #
 # temp_list = data["temp"].to_list()
 # print(len(temp_list))
@@ -58,13 +58,13 @@ data = pandas.read_csv("weather_data.csv")
 # monday_temp_F = monday_temp * (9/5) + 32
 # print(f"Converted Monday temperature is: {monday_temp_F} deg F")
 
-# Creating my own dataframe from scratch
-my_data_dictionary = {
-    "family": ["Charles", "Ashley", "Kai", "Brady", "Khaleesi", "Luther"],
-    "age": [33, 33, 0.7, 11, 9, 2]
-}
-
-new_data = pandas.DataFrame(my_data_dictionary)
-print(new_data)
-
-new_data.to_csv("my_new_data.csv")
+# # Creating my own dataframe from scratch
+# my_data_dictionary = {
+#     "family": ["Charles", "Ashley", "Kai", "Brady", "Khaleesi", "Luther"],
+#     "age": [33, 33, 0.7, 11, 9, 2]
+# }
+#
+# new_data = pandas.DataFrame(my_data_dictionary)
+# print(new_data)
+#
+# new_data.to_csv("my_new_data.csv")
