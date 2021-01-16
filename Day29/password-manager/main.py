@@ -1,6 +1,5 @@
 from tkinter import *
 
-
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 
 def gen_pass():
@@ -9,8 +8,14 @@ def gen_pass():
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 def pw_save():
-    print("pw saved")
-    pass
+    web = str(website_entry.get())
+    email = str(user_entry.get())
+    pw = str(password_entry.get())
+    with open("my_pw.txt", mode="a") as file:
+        file.write(f"{web} | {email} | {pw}")
+    website_entry.delete(0, END)
+    password_entry.delete(0, END)
+    website_entry.focus()
 
 # ---------------------------- UI SETUP ------------------------------- #
 
@@ -41,6 +46,7 @@ website_entry.grid(row=1, column=1, columnspan=2)
 website_entry.focus()
 
 user_entry = Entry(width=35)
+user_entry.insert(0, "default@email.com")
 user_entry.grid(row=2, column=1, columnspan=2)
 
 password_entry = Entry(width=21)
