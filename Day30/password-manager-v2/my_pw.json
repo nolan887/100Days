@@ -2,5 +2,13 @@
     "website1": {
         "email": "default@email.com",
         "password": "b8bK)WGV2+vP(L1B"
+    },
+    "web2": {
+        "email": "default@email.com",
+        "password": "+rvzJ#f0&2+WS44Z"
+    },
+    "web3": {
+        "email": "default@email.com",
+        "password": "HI4x(0db%f0ciF6u"
     }
 }

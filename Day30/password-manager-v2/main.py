@@ -69,6 +69,24 @@ def pw_save():
             password_entry.delete(0, END)
             website_entry.focus()
 
+# ---------------------------- SEARCH FOR PASSWORD ------------------------------- #
+def pw_search():
+    web = str(website_entry.get())
+    try:
+        with open("my_pw.json", mode="r") as file:
+            data = json.load(file)
+    except FileNotFoundError:
+        messagebox.showinfo(title="Error", message="No JSON data file found.")
+    else:
+        if web in data:
+            messagebox.showinfo(message=f"Website: {web}\n"
+                                        f"\nusername: {data[web]['email']}"
+                                        f"\npassword: {data[web]['password']}")
+        else:
+            messagebox.showinfo(title="Does Not Exist", message=f"No password exists in the database for website {web}")
+        website_entry.delete(0, END)
+        password_entry.delete(0, END)
+        website_entry.focus()
 
 # ---------------------------- UI SETUP ------------------------------- #
 # Setup Window
@@ -93,11 +111,11 @@ password_label = Label(text="Password: ")
 password_label.grid(row=3, column=0)
 
 # Setup Entry
-website_entry = Entry(width=35)
-website_entry.grid(row=1, column=1, columnspan=2)
+website_entry = Entry(width=21)
+website_entry.grid(row=1, column=1)
 website_entry.focus()
 
-user_entry = Entry(width=35)
+user_entry = Entry(width=40)
 user_entry.insert(0, "default@email.com")
 user_entry.grid(row=2, column=1, columnspan=2)
 
@@ -105,11 +123,14 @@ password_entry = Entry(width=21)
 password_entry.grid(row=3, column=1)
 
 # Button Setup
-generate_btn = Button(text="Generate Password", command=gen_pass)
+generate_btn = Button(text="Generate Password", command=gen_pass, width=18)
 generate_btn.grid(row=3, column=2)
 
-add_btn = Button(text="Add", command=pw_save, width=36)
+add_btn = Button(text="Add", command=pw_save, width=40)
 add_btn.grid(row=4, column=1, columnspan=2)
+
+search_btn = Button(text="Search", command=pw_search, width=18)
+search_btn.grid(row=1, column=2)
 
 # Keep Program Open
 window.mainloop()
