@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import messagebox
 from random import choice, randint, shuffle
 import pyperclip
+import json
 
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u',
@@ -32,13 +33,34 @@ def pw_save():
     web = str(website_entry.get())
     email = str(user_entry.get())
     pw = str(password_entry.get())
+    new_data = {
+        web: {
+            "email": email,
+            "password": pw
+            }
+        }
 
     if len(web) == 0 or len(email) == 0 or len(pw) == 0:
         messagebox.showerror(title="ERROR", message="One or more of the required fields are blank.")
         website_entry.focus()
     else:
-        with open("my_pw.txt", mode="a") as file:
-            file.write(f"\n{web} | {email} | {pw}")
+        # Writing to JSON
+        # with open("my_pw.json", mode="w") as file:
+            # json.dump(new_data, file, indent=4)
+
+        # Reading from JSON
+        # with open("my_pw.json", mode="r") as file:
+        #     data = json.load(file)
+        #     print(data)
+
+        # Updating JSON -- two steps
+        with open("my_pw.json", mode="r") as file:
+            data = json.load(file)
+            data.update(new_data)
+
+        with open ("my_pw.json", mode="w") as file:
+            json.dump(data, file, indent=4)
+
         website_entry.delete(0, END)
         password_entry.delete(0, END)
         website_entry.focus()

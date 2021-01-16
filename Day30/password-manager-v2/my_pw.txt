@@ -1,5 +1,0 @@
-
-web1 | default@email.com | pass1
-web2 | default@email.com | pass2
-website3 | default@email.com | pass3
-web4 | default@email.com | p4ssw0rd
