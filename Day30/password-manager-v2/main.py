@@ -54,16 +54,20 @@ def pw_save():
         #     print(data)
 
         # Updating JSON -- two steps
-        with open("my_pw.json", mode="r") as file:
-            data = json.load(file)
+        try:
+            with open("my_pw.json", mode="r") as file:
+                data = json.load(file)
+        except FileNotFoundError:
+            with open("my_pw.json", mode="w") as file:
+                json.dump(new_data, file, indent=4)
+        else:
             data.update(new_data)
-
-        with open ("my_pw.json", mode="w") as file:
-            json.dump(data, file, indent=4)
-
-        website_entry.delete(0, END)
-        password_entry.delete(0, END)
-        website_entry.focus()
+            with open ("my_pw.json", mode="w") as file:
+                json.dump(data, file, indent=4)
+        finally:
+            website_entry.delete(0, END)
+            password_entry.delete(0, END)
+            website_entry.focus()
 
 
 # ---------------------------- UI SETUP ------------------------------- #
