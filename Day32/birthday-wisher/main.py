@@ -2,6 +2,9 @@ import pandas
 import datetime as dt
 import random
 
+PLACEHOLDER = "[NAME]"
+OUTPUT_LINK = "./wishes-sent/"
+
 birthday_dict = {}
 letter_list = ["letter1.txt", "letter2.txt", "letter3.txt"]
 
@@ -20,8 +23,13 @@ current_date = now.day
 if (current_month, current_date) in birthday_dict:
     bday_name = birthday_dict[(current_month, current_date)][0]
     bday_email = birthday_dict[(current_month, current_date)][1]
-    bday_letter = random.choice(letter_list)
+    bday_letter = "letter_templates/" + str(random.choice(letter_list))
 
-# TODO: read the chosen letter and replace [name] with bday_name
+    with open(bday_letter, "rt") as ltr:
+        letter_contents = ltr.read()
+        new_wish = letter_contents.replace(PLACEHOLDER, bday_name)
+        with open((OUTPUT_LINK + bday_name + "_email.txt"), mode="w") as completed_email:
+            completed_email.write(new_wish)
+
 
 # TODO: format and send e-mail
