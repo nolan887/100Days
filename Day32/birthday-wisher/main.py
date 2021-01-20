@@ -1,9 +1,13 @@
 import pandas
 import datetime as dt
 import random
+import smtplib
 
 PLACEHOLDER = "[NAME]"
 OUTPUT_LINK = "./wishes-sent/"
+
+my_email = "pythoncraylie@gmail.com"
+my_pw = ""
 
 birthday_dict = {}
 letter_list = ["letter1.txt", "letter2.txt", "letter3.txt"]
@@ -30,6 +34,8 @@ if (current_month, current_date) in birthday_dict:
         new_wish = letter_contents.replace(PLACEHOLDER, bday_name)
         with open((OUTPUT_LINK + bday_name + "_email.txt"), mode="w") as completed_email:
             completed_email.write(new_wish)
-
-
-# TODO: format and send e-mail
+        with smtplib.SMTP("smtp.gmail.com", port=587) as connection:
+            connection.starttls()
+            connection.login(user=my_email, password=my_pw)
+            connection.sendmail(from_addr=my_email, to_addrs=my_email,
+                                msg=f"Subject: HBD!\n\n {new_wish}".encode("utf-8"))
