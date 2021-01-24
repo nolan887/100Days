@@ -1,5 +1,3 @@
-# TODO: Get 10 new questions every time the program is run and populate question_data
-
 import requests
 
 parameters = {
