@@ -3,7 +3,7 @@ import requests
 MY_LAT = 41.377289
 MY_LONG = -71.827461
 
-api_key = "c653eb49332fe60957ba3f8f37be99e5"
+api_key = "not to be shared"
 OWM_Endpoint = "https://api.openweathermap.org/data/2.5/onecall"
 
 weather_params = {
