@@ -10,7 +10,7 @@ stock_direction = None
 STOCK_ENDPOINT = "https://www.alphavantage.co/query"
 STOCK = "TSLA"
 COMPANY_NAME = "Tesla Inc"
-stock_key = ""
+stock_key = "STOCK_API_KEY"
 
 stock_params = {
     "function": "TIME_SERIES_DAILY",
@@ -20,7 +20,7 @@ stock_params = {
 
 # SETUP: News article fetching
 NEWS_ENDPOINT = "https://newsapi.org/v2/everything"
-news_key = ""
+news_key = os.environ.get("NEWS_API_KEY")
 
 news_params = {
     "q": STOCK,
@@ -30,8 +30,8 @@ news_params = {
 
 # SETUP: Twillio SMS Info
 account_sid = "AC96f51ba9845b52998cf4d9fdc593f577"
-auth_token = ""
-
+auth_token = os.environ.get("TWILLIO_AUTH_TOKEN")
+my_cell = os.environ.get("MY_NUMBER")
 
 
 # -------------------- STOCK FETCHING -------------------- #
@@ -67,7 +67,8 @@ if abs(closing_percent) > noteworthy_stock_change:
         # message = client.messages.create(
         #     body=article,
         #     from_='+16692013335',
-        #     to='+14016225183'
+        #     to=my_cell
         # )
 else:
     print("Nothing newsworthy")
+
