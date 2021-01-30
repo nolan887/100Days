@@ -5,9 +5,6 @@ from twilio.rest import Client
 MY_LAT = 41.377289
 MY_LONG = -71.827461
 
-MY_LAT = -33.068640
-MY_LONG = -71.585360
-
 # Openweather Info
 api_key = os.environ.get("OWM_API_KEY")
 OWM_Endpoint = "https://api.openweathermap.org/data/2.5/onecall"
