@@ -1,16 +1,21 @@
 import requests
+import os
+from twilio.rest import Client
 
-# MY_LAT = 41.377289
-# MY_LONG = -71.827461
+MY_LAT = 41.377289
+MY_LONG = -71.827461
 
-# Werribee, Austraila currently raining
-MY_LAT = 37.902900
-MY_LONG = 144.658470
+MY_LAT = -33.068640
+MY_LONG = -71.585360
 
-api_key = ""
+# Openweather Info
+api_key = os.environ.get("OWM_API_KEY")
 OWM_Endpoint = "https://api.openweathermap.org/data/2.5/onecall"
 
-weather_ids = []
+# Twilio Info
+account_sid = "AC96f51ba9845b52998cf4d9fdc593f577"
+auth_token = os.environ.get("AUTH_TOKEN")
+
 need_umbrella = False
 
 weather_params = {
@@ -34,3 +39,13 @@ for upcoming_hour in weather_slice:
 
 if need_umbrella:
     print("It's going to rain, bring an umbrella!")
+
+    client = Client(account_sid, auth_token)
+    message = client.messages \
+        .create(
+        body="It's going to rain today, bring an umbrella! ☔️",
+        from_='+16692013335',
+        to='+14016225183'
+    )
+
+    print(message.sid)
