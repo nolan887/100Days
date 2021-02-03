@@ -1,0 +1,3 @@
+This capstone is a build-on of Day 39.
+
+I'm not willing to sync my bank account to Tequila to implement their API, so I cannot complete this project.
