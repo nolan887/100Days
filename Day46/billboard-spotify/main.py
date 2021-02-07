@@ -18,7 +18,7 @@ sp = spotipy.Spotify(
         client_id=SPOTIFY_CLIENT_ID,
         client_secret=SPOTIFY_SECRET,
         show_dialog=True,
-        cache_path="token.txt"
+        cache_path="/ignore/token.txt"
     )
 )
 
