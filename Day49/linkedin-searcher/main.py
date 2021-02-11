@@ -46,7 +46,7 @@ while count <= 11:
 
     save_button = driver.find_element_by_xpath("/html/body/div[7]/div[3]/div[3]/div/div/section[2]/div/div/div[1]/div/div[1]/div/div/div[2]/div[2]/div[1]/button")
     save_button.click()
-    print(f"Saved job #{count}.")
+    print(f"Saved job #{count - 1}.")
 
     count += 1
 
