@@ -51,4 +51,4 @@ while count <= 11:
     count += 1
 
 # -------------------- WEB DRIVER COMPLETE -------------------- #
-# driver.quit()
+driver.quit()
