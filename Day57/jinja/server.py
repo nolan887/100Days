@@ -1,9 +1,28 @@
 from flask import Flask, render_template
 import random
 from datetime import datetime
+import requests
 
 app = Flask(__name__)
 
+def get_age(name):
+    endpoint = "https://api.agify.io?name=" + name
+    response = requests.get(endpoint).json()
+    guessed_age = response["age"]
+    return guessed_age
+
+def get_gender(name):
+    endpoint = "https://api.genderize.io?name=" + name
+    response = requests.get(endpoint).json()
+    guessed_gender = response["gender"]
+    return guessed_gender
+
+def get_probability(name):
+    endpoint = "https://api.genderize.io?name=" + name
+    response = requests.get(endpoint).json()
+    print(response)
+    gender_probability = float(response["probability"]) * 100
+    return gender_probability
 
 @app.route('/')
 def home():
@@ -11,6 +30,14 @@ def home():
     year = datetime.now().year
     return render_template('index.html', num=random_number, current_yr=year)
 
+@app.route('/guess/<string:name>')
+def guess(name):
+    age = get_age(name)
+    gender = get_gender(name)
+    probability = get_probability(name)
+    return f"<h1>Hello, {name.title()}!" \
+           f"<br>I'm {probability}% sure you are a {gender}" \
+           f"<br>Age guess: {age}"
 
 if __name__ == "__main__":
     app.run(debug=True)
