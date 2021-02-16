@@ -20,7 +20,6 @@ def get_gender(name):
 def get_probability(name):
     endpoint = "https://api.genderize.io?name=" + name
     response = requests.get(endpoint).json()
-    print(response)
     gender_probability = float(response["probability"]) * 100
     return gender_probability
 
