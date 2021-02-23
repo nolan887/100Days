@@ -1,0 +1,37 @@
+<!-- Header -->
+{% include "header.html" %}
+
+  <!-- Page Header -->
+  <header class="masthead" style="background-image: url('../static/img/home-bg.jpg')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="site-heading">
+            <h1>{{ post["title"] }}</h1>
+            <span class="subheading">{{ post["subtitle"] }}</span>
+            <span class="subheading">{{ post["author"] }} on {{ post["date"] }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="post-preview">
+          <p class="post-meta">
+              {{ post["body"] }}
+          </p>
+        </div>
+          <hr>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+<!-- Footer -->
+{% include "footer.html" %}
