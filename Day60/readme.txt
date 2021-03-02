@@ -1,0 +1,1 @@
+Part 2 of Day 60 is to create a functioning contact form from the Day 59 blog. These changes are implemented under the Day59 project folder.
