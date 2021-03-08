@@ -34,6 +34,10 @@ class RateMovieForm(FlaskForm):
     review = StringField("Your Review")
     submit = SubmitField("Done")
 
+class AddMovieForm(FlaskForm):
+    title = StringField("Movie Title")
+    submit = SubmitField("Add Movie")
+
 @app.route("/")
 def home():
     all_movies = db.session.query(Movie).all()
@@ -58,6 +62,11 @@ def delete():
     db.session.delete(movie_to_delete)
     db.session.commit()
     return redirect(url_for('home'))
+
+@app.route("/add", methods=["GET", "POST"])
+def add():
+    form = AddMovieForm()
+    return render_template("add.html", form=form)
 
 if __name__ == '__main__':
     app.run(debug=True)
