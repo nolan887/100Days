@@ -6,6 +6,10 @@ from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
 import requests
 
+movie_API = "dfcf38f0756fec961c14002048b0e1bf"
+movie_URL = f"https://api.themoviedb.org/3/search/movie?api_key={movie_API}&query="
+
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
 Bootstrap(app)
@@ -35,7 +39,7 @@ class RateMovieForm(FlaskForm):
     submit = SubmitField("Done")
 
 class AddMovieForm(FlaskForm):
-    title = StringField("Movie Title")
+    title = StringField("Movie Title", validators=[DataRequired()])
     submit = SubmitField("Add Movie")
 
 @app.route("/")
@@ -65,6 +69,23 @@ def delete():
 
 @app.route("/add", methods=["GET", "POST"])
 def add():
+    if request.method == "POST":
+        # new_movie = Movie(
+        #     title = request.form["title"],
+        #     year = "1969",
+        #     description = "fake credentials",
+        #     rating = "6.9",
+        #     ranking = "5",
+        #     review = "bad",
+        #     img_url = ""
+        # )
+        new_movie_url = movie_URL + request.form["title"]
+        response = requests.get(url=new_movie_url)
+        response.raise_for_status()
+        data = response.json()["results"]
+        # db.session.add(new_movie)
+        # db.session.commit()
+        return render_template("select.html", movie_search=data)
     form = AddMovieForm()
     return render_template("add.html", form=form)
 
