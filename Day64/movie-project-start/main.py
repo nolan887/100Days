@@ -70,24 +70,34 @@ def delete():
 @app.route("/add", methods=["GET", "POST"])
 def add():
     if request.method == "POST":
-        # new_movie = Movie(
-        #     title = request.form["title"],
-        #     year = "1969",
-        #     description = "fake credentials",
-        #     rating = "6.9",
-        #     ranking = "5",
-        #     review = "bad",
-        #     img_url = ""
-        # )
         new_movie_url = movie_URL + request.form["title"]
         response = requests.get(url=new_movie_url)
         response.raise_for_status()
         data = response.json()["results"]
-        # db.session.add(new_movie)
-        # db.session.commit()
         return render_template("select.html", movie_search=data)
     form = AddMovieForm()
     return render_template("add.html", form=form)
+
+@app.route("/find")
+def find_movie():
+    movie_api_id = request.args.get("id")
+    print(movie_api_id)
+
+    # new_movie = Movie(
+    #     title = request.form["title"],
+    #     year = "1969",
+    #     description = "fake credentials",
+    #     rating = "6.9",
+    #     ranking = "5",
+    #     review = "bad",
+    #     img_url = ""
+    # )
+
+
+    # db.session.add(new_movie)
+    # db.session.commit()
+
+    return redirect(url_for('home'))
 
 if __name__ == '__main__':
     app.run(debug=True)
