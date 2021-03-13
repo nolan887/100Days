@@ -7,8 +7,8 @@ from wtforms.validators import DataRequired
 import requests
 
 movie_API = "dfcf38f0756fec961c14002048b0e1bf"
-movie_URL = f"https://api.themoviedb.org/3/search/movie?api_key={movie_API}&query="
-
+movie_search_URL = f"https://api.themoviedb.org/3/search/movie?api_key={movie_API}&query="
+movie_known_URL = f"https://api.themoviedb.org/3/movie"
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
@@ -19,6 +19,7 @@ Bootstrap(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///movie-shelf.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
+
 
 # Creates the new table
 class Movie(db.Model):
@@ -70,7 +71,7 @@ def delete():
 @app.route("/add", methods=["GET", "POST"])
 def add():
     if request.method == "POST":
-        new_movie_url = movie_URL + request.form["title"]
+        new_movie_url = movie_search_URL + request.form["title"]
         response = requests.get(url=new_movie_url)
         response.raise_for_status()
         data = response.json()["results"]
@@ -82,7 +83,12 @@ def add():
 def find_movie():
     movie_api_id = request.args.get("id")
     print(movie_api_id)
-
+    if movie_api_id:
+        movie_api_url = f"{movie_known_URL}/{movie_api_id}?api_key={movie_API}"
+        print(movie_api_url)
+        response = requests.get(url=movie_api_url)
+        data = response.json()
+        print(data[""])
     # new_movie = Movie(
     #     title = request.form["title"],
     #     year = "1969",
