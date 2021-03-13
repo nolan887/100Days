@@ -9,6 +9,7 @@ import requests
 movie_API = "dfcf38f0756fec961c14002048b0e1bf"
 movie_search_URL = f"https://api.themoviedb.org/3/search/movie?api_key={movie_API}&query="
 movie_known_URL = f"https://api.themoviedb.org/3/movie"
+movie_poster_URL = "https://image.tmdb.org/t/p/w500"
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
@@ -45,7 +46,10 @@ class AddMovieForm(FlaskForm):
 
 @app.route("/")
 def home():
-    all_movies = db.session.query(Movie).all()
+    all_movies = Movie.query.order_by(Movie.rating).all()
+    for film in range(len(all_movies)):
+        all_movies[film].ranking = len(all_movies) - film
+    db.session.commit()
     return render_template("index.html", movies=all_movies)
 
 @app.route("/edit", methods=["GET", "POST"])
@@ -82,28 +86,21 @@ def add():
 @app.route("/find")
 def find_movie():
     movie_api_id = request.args.get("id")
-    print(movie_api_id)
     if movie_api_id:
         movie_api_url = f"{movie_known_URL}/{movie_api_id}?api_key={movie_API}"
-        print(movie_api_url)
         response = requests.get(url=movie_api_url)
-        data = response.json()
-        print(data[""])
-    # new_movie = Movie(
-    #     title = request.form["title"],
-    #     year = "1969",
-    #     description = "fake credentials",
-    #     rating = "6.9",
-    #     ranking = "5",
-    #     review = "bad",
-    #     img_url = ""
-    # )
-
-
-    # db.session.add(new_movie)
-    # db.session.commit()
-
-    return redirect(url_for('home'))
+        movie_search = response.json()
+        new_movie = Movie(
+            title = movie_search["title"],
+            year = movie_search["release_date"].split("-")[0],
+            description = movie_search["overview"],
+            rating = 0,
+            review = "",
+            img_url = f"{movie_poster_URL}{movie_search['poster_path']}"
+        )
+        db.session.add(new_movie)
+        db.session.commit()
+        return redirect(url_for('edit', id=new_movie.id))
 
 if __name__ == '__main__':
     app.run(debug=True)
