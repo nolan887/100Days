@@ -38,8 +38,6 @@ class CreatePostForm(FlaskForm):
     subtitle = StringField("Subtitle", validators=[DataRequired()])
     author = StringField("Your Name", validators=[DataRequired()])
     img_url = StringField("Blog Image URL", validators=[DataRequired(), URL()])
-
-    # Modified from regular WTForm to CK Editor
     body = CKEditorField("Blog Content", validators=[DataRequired()])
     submit = SubmitField("Submit Post")
 
@@ -55,7 +53,7 @@ def show_post(index):
     return render_template("post.html", post=requested_post)
 
 
-@app.route("/new-post", methods=["GET","POST"])
+@app.route("/new-post", methods=["GET", "POST"])
 def add_new_post():
     form = CreatePostForm()
     return render_template("make-post.html", form=form)
