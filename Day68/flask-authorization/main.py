@@ -1,3 +1,4 @@
+import werkzeug
 from flask import Flask, render_template, request, url_for, redirect, flash, send_from_directory
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_sqlalchemy import SQLAlchemy
@@ -28,14 +29,15 @@ def home():
 @app.route('/register', methods=["GET","POST"])
 def register():
     if request.method =="POST":
+        user_pass = request.form.get('password')
+        hashed_pw = werkzeug.security.generate_password_hash(user_pass, method='pbkdf2:sha256', salt_length=8)
         new_user = User(
             email = request.form.get('email'),
             name = request.form.get('name'),
-            password = request.form.get('password')
+            password = hashed_pw
         )
         db.session.add(new_user)
         db.session.commit()
-        print(new_user.name)
         return redirect(url_for("secrets", username=new_user.name))
     return render_template("register.html")
 
